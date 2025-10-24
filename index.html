@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🎯 Permainan Interaktif: Teka Nombor</title>
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #80d0c7, #0093e9);
+      color: #fff;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    h1 {
+      font-size: 2em;
+      margin-bottom: 10px;
+    }
+
+    .game-box {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+      width: 300px;
+    }
+
+    input {
+      padding: 10px;
+      font-size: 1em;
+      border: none;
+      border-radius: 10px;
+      width: 100%;
+      text-align: center;
+      margin-bottom: 15px;
+    }
+
+    button {
+      background: #00b4d8;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      font-size: 1em;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #0077b6;
+    }
+
+    p {
+      font-size: 1em;
+      margin-top: 10px;
+    }
+
+    .result {
+      font-weight: bold;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="game-box">
+    <h1>🎯 Teka Nombor Rahsia</h1>
+    <p>Saya ada nombor antara <strong>1 hingga 20</strong>. Boleh teka?</p>
+    <input type="number" id="tekaan" placeholder="Masukkan nombor kamu" min="1" max="20">
+    <button onclick="periksaTeka()">Teka!</button>
+    <p class="result" id="result"></p>
+    <button onclick="mulaSemula()">🔁 Mula Semula</button>
+  </div>
+
+  <script>
+    let nomborRahsia = Math.floor(Math.random() * 20) + 1;
+    let percubaan = 0;
+
+    function periksaTeka() {
+      const tekaan = parseInt(document.getElementById("tekaan").value);
+      const result = document.getElementById("result");
+      percubaan++;
+
+      if (!tekaan || tekaan < 1 || tekaan > 20) {
+        result.innerHTML = "⚠️ Sila masukkan nombor antara 1 dan 20!";
+        return;
+      }
+
+      if (tekaan === nomborRahsia) {
+        result.innerHTML = `🎉 Hebat! Nombor betul ialah ${nomborRahsia}. Anda meneka dalam ${percubaan} percubaan.`;
+      } else if (tekaan < nomborRahsia) {
+        result.innerHTML = "📉 Terlalu rendah! Cuba lagi.";
+      } else {
+        result.innerHTML = "📈 Terlalu tinggi! Cuba lagi.";
+      }
+    }
+
+    function mulaSemula() {
+      nomborRahsia = Math.floor(Math.random() * 20) + 1;
+      percubaan = 0;
+      document.getElementById("result").innerHTML = "";
+      document.getElementById("tekaan").value = "";
+    }
+  </script>
+</body>
+</html>
